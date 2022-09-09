@@ -1,5 +1,5 @@
-DECLIT   [line -01]  39
-DECLIT   [line -01]  skdnbsljfd
+DECLIT   [line 001]  39
+DECLIT   [line 002]  skdnbsljfd
 asd slj 203
-DECLIT   [line -01]  c
+DECLIT   [line 003]  c
 0x348

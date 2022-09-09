@@ -1,19 +1,19 @@
-==3451556== Memcheck, a memory error detector
-==3451556== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3451556== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==3451556== Command: ../decaf inputs/ignore_whitespace.decaf
-==3451556== 
-DECLIT   [line -01]  39
-DECLIT   [line -01]  skdnbsljfd
+==3456366== Memcheck, a memory error detector
+==3456366== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3456366== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==3456366== Command: ../decaf inputs/ignore_whitespace.decaf
+==3456366== 
+DECLIT   [line 001]  39
+DECLIT   [line 002]  skdnbsljfd
 asd slj 203
-DECLIT   [line -01]  c
+DECLIT   [line 003]  c
 0x348
-==3451556== 
-==3451556== HEAP SUMMARY:
-==3451556==     in use at exit: 0 bytes in 0 blocks
-==3451556==   total heap usage: 354 allocs, 354 frees, 53,880 bytes allocated
-==3451556== 
-==3451556== All heap blocks were freed -- no leaks are possible
-==3451556== 
-==3451556== For lists of detected and suppressed errors, rerun with: -s
-==3451556== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3456366== 
+==3456366== HEAP SUMMARY:
+==3456366==     in use at exit: 0 bytes in 0 blocks
+==3456366==   total heap usage: 354 allocs, 354 frees, 53,880 bytes allocated
+==3456366== 
+==3456366== All heap blocks were freed -- no leaks are possible
+==3456366== 
+==3456366== For lists of detected and suppressed errors, rerun with: -s
+==3456366== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

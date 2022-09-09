@@ -1,8 +1,13 @@
 B_add                          FAIL (see outputs/B_add.diff for details)
-C_valid_hex                    FAIL (see outputs/C_valid_hex.diff for details)
+C_valid_hex                    pass
+C_valid_string                 FAIL (see outputs/C_valid_string.diff for details)
+C_valid_basic_symbols          FAIL (see outputs/C_valid_basic_symbols.diff for details)
 C_ignore_whitespace            FAIL (see outputs/C_ignore_whitespace.diff for details)
+C_invalid_hex                  pass
 Memory leak(s) found. See files listed below for details.
   - valgrind/B_add.txt
+  - valgrind/C_invalid_hex.txt
+  - valgrind/C_valid_basic_symbols.txt
 ========================================
  NOTICE: THIS TESTSUITE IS INCOMPLETE.
 YOU WILL BE GRADED ON OTHER TEST CASES.

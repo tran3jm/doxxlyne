@@ -22,26 +22,32 @@ TokenQueue* lex (char* text)
  
     /* read and handle input */
     char match[MAX_TOKEN_LEN];
+    int placeholder = 1;
     while (*text != '\0') {
  
         /* match regular expressions */
         if (Regex_match(whitespace, text, match)) {
             /* ignore whitespace */
         } else if (Regex_match(hex, text, match)) {
-            TokenQueue_add(tokens, Token_new(HEXLIT, match, -1));
-
+            TokenQueue_add(tokens, Token_new(HEXLIT, match, placeholder));
+            placeholder++;
+            
         } else if (Regex_match(string_literals, text, match)) {
-            TokenQueue_add(tokens, Token_new(STRLIT, match, -1));
+            TokenQueue_add(tokens, Token_new(STRLIT, match, placeholder));
+            placeholder++;
 
         } else if (Regex_match(symbols, text, match)) {
-            TokenQueue_add(tokens, Token_new(SYM, match, -1));
+            TokenQueue_add(tokens, Token_new(SYM, match, placeholder));
+            placeholder++;
 
         } else if (Regex_match(int_constants, text, match)) {
-            TokenQueue_add(tokens, Token_new(DECLIT, match, -1));
+            TokenQueue_add(tokens, Token_new(DECLIT, match, placeholder));
+            placeholder++;
 
         } else if (Regex_match(identifiers, text, match)) {
-            TokenQueue_add(tokens, Token_new(ID, match, -1));
-
+            TokenQueue_add(tokens, Token_new(ID, match, placeholder));
+            placeholder++;
+            
         } else {
             Error_throw_printf("Invalid token!\n");
         }

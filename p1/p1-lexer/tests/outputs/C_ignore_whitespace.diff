@@ -1,16 +1,13 @@
---- outputs/C_ignore_whitespace.txt	2022-09-09 03:34:51.281148585 -0400
-+++ expected/C_ignore_whitespace.txt	2022-09-08 02:15:34.414631862 -0400
-@@ -1,5 +1,7 @@
--DECLIT   [line -01]  39
--DECLIT   [line -01]  skdnbsljfd
+--- outputs/C_ignore_whitespace.txt	2022-09-09 04:03:50.014038634 -0400
++++ expected/C_ignore_whitespace.txt	2022-09-09 03:46:45.872089981 -0400
+@@ -1,5 +1,4 @@
+-DECLIT   [line 001]  39
+-DECLIT   [line 002]  skdnbsljfd
 -asd slj 203
--DECLIT   [line -01]  c
+-DECLIT   [line 003]  c
 -0x348
-+DECLIT   [line 001]  39
-+ID       [line 001]  skdnbsljfd
-+ID       [line 002]  asd
-+ID       [line 002]  slj
-+DECLIT   [line 002]  203
-+ID       [line 002]  c
-+HEXLIT   [line 003]  0x348
++SYM   [line 001]  !
++SYM   [line 002]  ?
++SYM   [line 003]  -
++SYM   [line 004]  ,
 \ No newline at end of file
