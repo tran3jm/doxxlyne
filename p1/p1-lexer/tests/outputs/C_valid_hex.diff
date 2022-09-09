@@ -1,0 +1,12 @@
+--- outputs/C_valid_hex.txt	2022-09-09 03:32:21.011687607 -0400
++++ expected/C_valid_hex.txt	2022-09-08 01:56:15.007243957 -0400
+@@ -1,4 +1,4 @@
+-HEXLIT   [line -01]  0x340
+-HEXLIT   [line -01]  0xD34
+-HEXLIT   [line -01]  0xd45
+-HEXLIT   [line -01]  0x9a2b
++HEXLIT   [line 001]  0x34
++HEXLIT   [line 002]  0xD34
++HEXLIT   [line 003]  0xd45
++HEXLIT   [line 004]  0x9a2b
+\ No newline at end of file

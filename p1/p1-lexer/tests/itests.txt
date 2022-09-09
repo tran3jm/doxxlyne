@@ -1,6 +1,8 @@
 B_add                          FAIL (see outputs/B_add.diff for details)
+C_valid_hex                    FAIL (see outputs/C_valid_hex.diff for details)
+C_ignore_whitespace            FAIL (see outputs/C_ignore_whitespace.diff for details)
 Memory leak(s) found. See files listed below for details.
-  - ==3026213==    definitely lost
+  - valgrind/B_add.txt
 ========================================
  NOTICE: THIS TESTSUITE IS INCOMPLETE.
 YOU WILL BE GRADED ON OTHER TEST CASES.

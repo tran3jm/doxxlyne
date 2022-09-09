@@ -14,9 +14,13 @@ TokenQueue* lex (char* text)
     Regex* whitespace = Regex_new("^[ \n]");
     Regex* letter = Regex_new("^[a-zA-Z]+");
 
-    Regex* symbols = Regex_new("^\\(|\\)|\\+|\\*");
+    Regex* symbols = Regex_new("^\\(|\\)|\\+|\\*|\\-|\\!|\\||\\?");
     Regex* int_constants = Regex_new("^0|[1-9]+[0-9]*");
     Regex* identifiers = Regex_new("^[a-zA-Z][0-9a-zA-Z_]*");
+
+    Regex* hex = Regex_new("^0x[a-fA-F0-9]+");
+    Regex* string_literals = Regex_new("^\\\".*\\\"");
+    // Regex* basic_symbols = Regex_new("^[]");
  
     /* read and handle input */
     char match[MAX_TOKEN_LEN];
@@ -26,17 +30,26 @@ TokenQueue* lex (char* text)
         if (Regex_match(whitespace, text, match)) {
             /* ignore whitespace */
         } else if (Regex_match(letter, text, match)) {
-            /* TODO: implement line count and replace placeholder (-1) */
             TokenQueue_add(tokens, Token_new(ID, match, -1));
+
+        } else if (Regex_match(hex, text, match)) {
+            TokenQueue_add(tokens, Token_new(HEXLIT, match, -1));
+
+        // } else if (Regex_match(basic_symbols, text, match)) {
+        //     TokenQueue_add(tokens, Token_new(SYM, match, -1));
+
+        } else if (Regex_match(string_literals, text, match)) {
+            TokenQueue_add(tokens, Token_new(STRLIT, match, -1));
+
         } else if (Regex_match(symbols, text, match)) {
-            /* TODO: implement line count and replace placeholder (-1) */
             TokenQueue_add(tokens, Token_new(SYM, match, -1));
+
         } else if (Regex_match(int_constants, text, match)) {
-            /* TODO: implement line count and replace placeholder (-1) */
             TokenQueue_add(tokens, Token_new(DECLIT, match, -1));
+
         } else if (Regex_match(identifiers, text, match)) {
-            /* TODO: implement line count and replace placeholder (-1) */
             TokenQueue_add(tokens, Token_new(ID, match, -1));
+
         } else {
             Error_throw_printf("Invalid token!\n");
         }
@@ -48,6 +61,12 @@ TokenQueue* lex (char* text)
     /* clean up */
     Regex_free(whitespace);
     Regex_free(letter);
+    Regex_free(symbols);
+    Regex_free(int_constants);
+    Regex_free(identifiers);
+    Regex_free(hex);
+    Regex_free(string_literals);
+    // Regex_free(basic_symbols);
  
     return tokens;
 }

@@ -4,4 +4,6 @@
 #    <ARGS>     command-line arguments to test
 
 run_test    B_add                       "inputs/add.decaf"
+run_test    C_valid_hex                 "inputs/valid_hex.decaf"
+run_test    C_ignore_whitespace         "inputs/ignore_whitespace.decaf"
 
