@@ -1,9 +1,5 @@
 Running suite(s): Default
-60%: Checks: 20, Failures: 7, Errors: 1
-public.c:26:F:Public:B_keyword:0: Assertion 'valid_1token("def", KEY, "def")' failed
-public.c:27:F:Public:B_invalid_for:0: Assertion 'invalid_tokens("for")' failed
-public.c:28:F:Public:B_symbol_equal:0: Assertion 'valid_1token("==", SYM, "==")' failed
-public.c:30:F:Public:B_multi_tokens1:0: Assertion 'valid_2tokens("def  ab", KEY, "def", ID, "ab")' failed
+80%: Checks: 20, Failures: 3, Errors: 1
 public.c:35:F:Public:B_multi_tokens2:0: Assertion 'valid_tokens("def foo;", 3, multi_tokens2)' failed
 public.c:37:F:Public:A_comments:0: Assertion 'valid_0tokens("// test")' failed
 public.c:38:F:Public:A_keyword_id:0: Assertion 'valid_1token("int3", ID, "int3")' failed

@@ -13,13 +13,15 @@ TokenQueue* lex (char* text)
     /* compile regular expressions */
     Regex* whitespace = Regex_new("^[ \n]");
 
-    Regex* symbols = Regex_new("^\\(|\\)|\\+|\\*|\\-|\\!|\\||\\?");
+    Regex* symbols = Regex_new("^\\(|\\)|\\+|\\*|\\-|\\!|==|\\||\\?");
     Regex* int_constants = Regex_new("^0|[1-9]+[0-9]*");
     Regex* identifiers = Regex_new("^[a-zA-Z][0-9a-zA-Z_]*");
 
     Regex* hex = Regex_new("^0x[a-fA-F0-9]+");
     Regex* string_literals = Regex_new("^\\\".*\\\"");
- 
+    Regex* valid_keywords = Regex_new("^def|^if|^else|^while|^break|^continue|^int|^bool|^void|^true|^false");
+    Regex* invalid_keywords = Regex_new("^for|^callout|^class|^interface|^extends|^implements|^new|^string|^float|^double|^null");
+
     /* read and handle input */
     char match[MAX_TOKEN_LEN];
     int placeholder = 1;
@@ -44,6 +46,14 @@ TokenQueue* lex (char* text)
             TokenQueue_add(tokens, Token_new(DECLIT, match, placeholder));
             placeholder++;
 
+        } else if (Regex_match(valid_keywords, text, match)) {
+            TokenQueue_add(tokens, Token_new(KEY, match, placeholder));
+            placeholder++;
+            
+        } else if (Regex_match(invalid_keywords, text, match)) {
+            Error_throw_printf("Invalid token!\n");
+            placeholder++;
+            
         } else if (Regex_match(identifiers, text, match)) {
             TokenQueue_add(tokens, Token_new(ID, match, placeholder));
             placeholder++;

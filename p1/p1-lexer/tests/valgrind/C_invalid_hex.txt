@@ -1,21 +1,21 @@
-==3456374== Memcheck, a memory error detector
-==3456374== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3456374== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==3456374== Command: ../decaf inputs/invalid_hex.decaf
-==3456374== 
+==12032== Memcheck, a memory error detector
+==12032== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12032== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==12032== Command: ../decaf inputs/invalid_hex.decaf
+==12032== 
 Invalid token!
-==3456374== 
-==3456374== HEAP SUMMARY:
-==3456374==     in use at exit: 38,128 bytes in 316 blocks
-==3456374==   total heap usage: 382 allocs, 66 frees, 54,980 bytes allocated
-==3456374== 
-==3456374== LEAK SUMMARY:
-==3456374==    definitely lost: 400 bytes in 7 blocks
-==3456374==    indirectly lost: 37,728 bytes in 309 blocks
-==3456374==      possibly lost: 0 bytes in 0 blocks
-==3456374==    still reachable: 0 bytes in 0 blocks
-==3456374==         suppressed: 0 bytes in 0 blocks
-==3456374== Rerun with --leak-check=full to see details of leaked memory
-==3456374== 
-==3456374== For lists of detected and suppressed errors, rerun with: -s
-==3456374== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==12032== 
+==12032== HEAP SUMMARY:
+==12032==     in use at exit: 67,564 bytes in 604 blocks
+==12032==   total heap usage: 726 allocs, 122 frees, 113,320 bytes allocated
+==12032== 
+==12032== LEAK SUMMARY:
+==12032==    definitely lost: 528 bytes in 9 blocks
+==12032==    indirectly lost: 67,036 bytes in 595 blocks
+==12032==      possibly lost: 0 bytes in 0 blocks
+==12032==    still reachable: 0 bytes in 0 blocks
+==12032==         suppressed: 0 bytes in 0 blocks
+==12032== Rerun with --leak-check=full to see details of leaked memory
+==12032== 
+==12032== For lists of detected and suppressed errors, rerun with: -s
+==12032== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
