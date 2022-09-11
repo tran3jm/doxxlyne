@@ -1,24 +1,24 @@
-==11977== Memcheck, a memory error detector
-==11977== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==11977== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==11977== Command: ../decaf inputs/valid_hex.decaf
-==11977== 
+==669360== Memcheck, a memory error detector
+==669360== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==669360== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==669360== Command: ../decaf inputs/valid_hex.decaf
+==669360== 
 HEXLIT   [line 001]  0x340
 HEXLIT   [line 002]  0xD34
 HEXLIT   [line 003]  0xd45
 HEXLIT   [line 004]  0x9a2b
-==11977== 
-==11977== HEAP SUMMARY:
-==11977==     in use at exit: 29,016 bytes in 284 blocks
-==11977==   total heap usage: 695 allocs, 411 frees, 112,308 bytes allocated
-==11977== 
-==11977== LEAK SUMMARY:
-==11977==    definitely lost: 128 bytes in 2 blocks
-==11977==    indirectly lost: 28,888 bytes in 282 blocks
-==11977==      possibly lost: 0 bytes in 0 blocks
-==11977==    still reachable: 0 bytes in 0 blocks
-==11977==         suppressed: 0 bytes in 0 blocks
-==11977== Rerun with --leak-check=full to see details of leaked memory
-==11977== 
-==11977== For lists of detected and suppressed errors, rerun with: -s
-==11977== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==669360== 
+==669360== HEAP SUMMARY:
+==669360==     in use at exit: 29,016 bytes in 284 blocks
+==669360==   total heap usage: 695 allocs, 411 frees, 112,308 bytes allocated
+==669360== 
+==669360== LEAK SUMMARY:
+==669360==    definitely lost: 128 bytes in 2 blocks
+==669360==    indirectly lost: 28,888 bytes in 282 blocks
+==669360==      possibly lost: 0 bytes in 0 blocks
+==669360==    still reachable: 0 bytes in 0 blocks
+==669360==         suppressed: 0 bytes in 0 blocks
+==669360== Rerun with --leak-check=full to see details of leaked memory
+==669360== 
+==669360== For lists of detected and suppressed errors, rerun with: -s
+==669360== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,4 +1,4 @@
---- outputs/C_ignore_whitespace.txt	2022-09-11 13:29:35.790371960 -0400
+--- outputs/C_ignore_whitespace.txt	2022-09-11 13:34:58.037502291 -0400
 +++ expected/C_ignore_whitespace.txt	2022-09-11 13:08:06.049821962 -0400
 @@ -1,5 +1,4 @@
 -DECLIT   [line 001]  39

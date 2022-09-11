@@ -1,4 +1,4 @@
---- outputs/C_valid_basic_symbols.txt	2022-09-11 13:29:35.382367997 -0400
+--- outputs/C_valid_basic_symbols.txt	2022-09-11 13:34:57.421496307 -0400
 +++ expected/C_valid_basic_symbols.txt	2022-09-11 13:08:06.057822040 -0400
 @@ -0,0 +1,7 @@
 +DECLIT   [line 001]  39
