@@ -1,4 +1,4 @@
---- outputs/C_valid_string.txt	2022-09-11 13:34:56.573488070 -0400
+--- outputs/C_valid_string.txt	2022-09-11 14:08:08.560801326 -0400
 +++ expected/C_valid_string.txt	2022-09-11 13:08:06.065822118 -0400
 @@ -1,3 +1,3 @@
  STRLIT   [line 001]  "kasdj293x"

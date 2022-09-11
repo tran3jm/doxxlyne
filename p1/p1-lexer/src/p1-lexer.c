@@ -21,7 +21,7 @@ TokenQueue* lex (char* text)
     Regex* string_literals = Regex_new("^\\\".*\\\"");
     Regex* valid_keywords = Regex_new("^def|^if|^else|^while|^break|^continue|^int|^bool|^void|^true|^false");
     Regex* invalid_keywords = Regex_new("^for|^callout|^class|^interface|^extends|^implements|^new|^string|^float|^double|^null");
-
+    Regex* comments = Regex_new("// [0-9a-zA-Z_]*");
     /* read and handle input */
     char match[MAX_TOKEN_LEN];
     int placeholder = 1;
@@ -54,7 +54,10 @@ TokenQueue* lex (char* text)
             Error_throw_printf("Invalid token!\n");
             placeholder++;
             
-        } else if (Regex_match(identifiers, text, match)) {
+        } else if (Regex_match(comments, text, match)) {
+            placeholder++;
+
+        }else if (Regex_match(identifiers, text, match)) {
             TokenQueue_add(tokens, Token_new(ID, match, placeholder));
             placeholder++;
             
@@ -73,7 +76,9 @@ TokenQueue* lex (char* text)
     Regex_free(identifiers);
     Regex_free(hex);
     Regex_free(string_literals);
- 
+    Regex_free(valid_keywords);
+    Regex_free(invalid_keywords);
+    Regex_free(comments);
     return tokens;
 }
 

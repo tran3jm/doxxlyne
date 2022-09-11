@@ -1,6 +1,5 @@
 Running suite(s): Default
-80%: Checks: 20, Failures: 3, Errors: 1
+85%: Checks: 20, Failures: 2, Errors: 1
 public.c:35:F:Public:B_multi_tokens2:0: Assertion 'valid_tokens("def foo;", 3, multi_tokens2)' failed
-public.c:37:F:Public:A_comments:0: Assertion 'valid_0tokens("// test")' failed
 public.c:38:F:Public:A_keyword_id:0: Assertion 'valid_1token("int3", ID, "int3")' failed
 private.c:5:E:Private:A_null_string:0: (after this point) Received signal 11 (Segmentation fault)
