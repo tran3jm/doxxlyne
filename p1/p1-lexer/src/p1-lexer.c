@@ -26,7 +26,12 @@ TokenQueue* lex (char* text)
     char match[MAX_TOKEN_LEN];
     int placeholder = 1;
     while (*text != '\0') {
- 
+        // Thoughts for B test multiple
+        // Loop with some boolean variable, 
+        // once it gets to the end of the line, 
+        // then increment placeholder that way 
+        //multiple tokens can be on the same line
+        
         /* match regular expressions */
         if (Regex_match(whitespace, text, match)) {
             /* ignore whitespace */
