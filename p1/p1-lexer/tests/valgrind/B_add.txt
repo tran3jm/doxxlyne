@@ -1,10 +1,10 @@
-==4101315== Memcheck, a memory error detector
-==4101315== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4101315== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==4101315== Command: ../decaf inputs/add.decaf
-==4101315== 
-ID       [line 001]  def
-ID       [line 001]  int
+==4122105== Memcheck, a memory error detector
+==4122105== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4122105== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==4122105== Command: ../decaf inputs/add.decaf
+==4122105== 
+KEYWORD  [line 001]  def
+KEYWORD  [line 001]  int
 ID       [line 001]  main
 SYMBOL   [line 001]  (
 SYMBOL   [line 001]  )
@@ -15,18 +15,18 @@ SYMBOL   [line 004]  4 +
 SYMBOL   [line 004]  5;
 SYMBOL   [line 005]  	return a;
 SYMBOL   [line 006]  }
-==4101315== 
-==4101315== HEAP SUMMARY:
-==4101315==     in use at exit: 1,548 bytes in 38 blocks
-==4101315==   total heap usage: 823 allocs, 785 frees, 129,068 bytes allocated
-==4101315== 
-==4101315== LEAK SUMMARY:
-==4101315==    definitely lost: 64 bytes in 1 blocks
-==4101315==    indirectly lost: 1,484 bytes in 37 blocks
-==4101315==      possibly lost: 0 bytes in 0 blocks
-==4101315==    still reachable: 0 bytes in 0 blocks
-==4101315==         suppressed: 0 bytes in 0 blocks
-==4101315== Rerun with --leak-check=full to see details of leaked memory
-==4101315== 
-==4101315== For lists of detected and suppressed errors, rerun with: -s
-==4101315== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4122105== 
+==4122105== HEAP SUMMARY:
+==4122105==     in use at exit: 1,548 bytes in 38 blocks
+==4122105==   total heap usage: 900 allocs, 862 frees, 146,960 bytes allocated
+==4122105== 
+==4122105== LEAK SUMMARY:
+==4122105==    definitely lost: 64 bytes in 1 blocks
+==4122105==    indirectly lost: 1,484 bytes in 37 blocks
+==4122105==      possibly lost: 0 bytes in 0 blocks
+==4122105==    still reachable: 0 bytes in 0 blocks
+==4122105==         suppressed: 0 bytes in 0 blocks
+==4122105== Rerun with --leak-check=full to see details of leaked memory
+==4122105== 
+==4122105== For lists of detected and suppressed errors, rerun with: -s
+==4122105== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -49,26 +49,26 @@ TokenQueue* lex (char* text)
             }
         } else if (Regex_match(space, text, match)) {
 
-        } else if (Regex_match(identifiers, text, match)) {
-            TokenQueue_add(tokens, Token_new(ID, match, placeholder));
+        } else if (Regex_match(valid_keywords, text, match)) {
+            TokenQueue_add(tokens, Token_new(KEY, match, placeholder));
             
+        } else if (Regex_match(invalid_keywords, text, match)) {
+            Error_throw_printf("Invalid token!\n");
+
         } else if (Regex_match(hex, text, match)) {
             TokenQueue_add(tokens, Token_new(HEXLIT, match, placeholder));
             
         } else if (Regex_match(string_literals, text, match)) {
             TokenQueue_add(tokens, Token_new(STRLIT, match, placeholder));
 
+        } else if (Regex_match(identifiers, text, match)) {
+            TokenQueue_add(tokens, Token_new(ID, match, placeholder));
+            
         } else if (Regex_match(symbols, text, match)) {
             TokenQueue_add(tokens, Token_new(SYM, match, placeholder));
 
         } else if (Regex_match(int_constants, text, match)) {
             TokenQueue_add(tokens, Token_new(DECLIT, match, placeholder));
-
-        } else if (Regex_match(valid_keywords, text, match)) {
-            TokenQueue_add(tokens, Token_new(KEY, match, placeholder));
-            
-        } else if (Regex_match(invalid_keywords, text, match)) {
-            Error_throw_printf("Invalid token!\n");
 
         } else if (Regex_match(comments, text, match)) {
 

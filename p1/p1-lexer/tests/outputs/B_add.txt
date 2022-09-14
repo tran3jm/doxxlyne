@@ -1,5 +1,5 @@
-ID       [line 001]  def
-ID       [line 001]  int
+KEYWORD  [line 001]  def
+KEYWORD  [line 001]  int
 ID       [line 001]  main
 SYMBOL   [line 001]  (
 SYMBOL   [line 001]  )
