@@ -1,23 +1,23 @@
-==26993== Memcheck, a memory error detector
-==26993== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==26993== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==26993== Command: ../decaf inputs/valid_string_c.decaf
-==26993== 
+==4122139== Memcheck, a memory error detector
+==4122139== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4122139== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==4122139== Command: ../decaf inputs/valid_string_c.decaf
+==4122139== 
 STRLIT   [line 001]  ""
 STRLIT   [line 002]  "hey"
 STRLIT   [line 003]  "123poc_9sdl;"
-==26993== 
-==26993== HEAP SUMMARY:
-==26993==     in use at exit: 1,600 bytes in 38 blocks
-==26993==   total heap usage: 1,045 allocs, 1,007 frees, 127,820 bytes allocated
-==26993== 
-==26993== LEAK SUMMARY:
-==26993==    definitely lost: 64 bytes in 1 blocks
-==26993==    indirectly lost: 1,536 bytes in 37 blocks
-==26993==      possibly lost: 0 bytes in 0 blocks
-==26993==    still reachable: 0 bytes in 0 blocks
-==26993==         suppressed: 0 bytes in 0 blocks
-==26993== Rerun with --leak-check=full to see details of leaked memory
-==26993== 
-==26993== For lists of detected and suppressed errors, rerun with: -s
-==26993== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4122139== 
+==4122139== HEAP SUMMARY:
+==4122139==     in use at exit: 1,548 bytes in 38 blocks
+==4122139==   total heap usage: 779 allocs, 741 frees, 124,232 bytes allocated
+==4122139== 
+==4122139== LEAK SUMMARY:
+==4122139==    definitely lost: 64 bytes in 1 blocks
+==4122139==    indirectly lost: 1,484 bytes in 37 blocks
+==4122139==      possibly lost: 0 bytes in 0 blocks
+==4122139==    still reachable: 0 bytes in 0 blocks
+==4122139==         suppressed: 0 bytes in 0 blocks
+==4122139== Rerun with --leak-check=full to see details of leaked memory
+==4122139== 
+==4122139== For lists of detected and suppressed errors, rerun with: -s
+==4122139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

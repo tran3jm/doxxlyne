@@ -10,6 +10,6 @@ run_test    C_valid_hex                 "inputs/valid_hex.decaf"
 run_test    C_valid_string              "inputs/valid_string_c.decaf"
 run_test    C_valid_basic_symbols       "inputs/valid_symbols_c.decaf"
 run_test    C_ignore_whitespace         "inputs/ignore_whitespace.decaf"
-run_test    C_invalid_hex                "inputs/invalid_hex.decaf"
-run_test    C_invalid_string             "inputs/invalid_string.decaf"
+run_test    C_invalid_hex               "inputs/invalid_hex.decaf"
+run_test    C_invalid_string            "inputs/invalid_string.decaf"
 

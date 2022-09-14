@@ -8,6 +8,10 @@
 
 TokenQueue* lex (char* text)
 {
+    if(text == NULL || (strncmp(text, "\0", 1) == 0)) {
+        Error_throw_printf("NULL or Invalid input!\n");
+        return NULL;
+    }
     TokenQueue* tokens = TokenQueue_new();
  
     /* compile regular expressions */
@@ -54,12 +58,18 @@ TokenQueue* lex (char* text)
         } else if (Regex_match(identifiers, text, match)) {
             TokenQueue_add(tokens, Token_new(ID, match, placeholder));
             
+        } else if (Regex_match(invalid_keywords, text, match)) {
+            Error_throw_printf("Invalid token!\n");
+
         } else if (Regex_match(hex, text, match)) {
             TokenQueue_add(tokens, Token_new(HEXLIT, match, placeholder));
             
         } else if (Regex_match(string_literals, text, match)) {
             TokenQueue_add(tokens, Token_new(STRLIT, match, placeholder));
 
+        } else if (Regex_match(identifiers, text, match)) {
+            TokenQueue_add(tokens, Token_new(ID, match, placeholder));
+            
         } else if (Regex_match(symbols, text, match)) {
             TokenQueue_add(tokens, Token_new(SYM, match, placeholder));
 

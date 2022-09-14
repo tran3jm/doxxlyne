@@ -1,9 +1,11 @@
---- outputs/B_add.txt	2022-09-14 15:05:04.624064874 -0400
-+++ expected/B_add.txt	2022-09-07 13:12:49.872334544 -0400
-@@ -9,9 +9,11 @@
- SYMBOL   [line 003]  ;
- ID       [line 004]  a
- SYMBOL   [line 004]  =
+--- outputs/B_add.txt	2022-09-14 14:09:31.955684477 -0400
++++ expected/B_add.txt	2022-09-07 13:29:30.066199657 -0400
+@@ -4,9 +4,16 @@
+ SYMBOL   [line 001]  (
+ SYMBOL   [line 001]  )
+ SYMBOL   [line 002]  {
+-SYMBOL   [line 003]  	int a;
+-SYMBOL   [line 004]  	a =
 -SYMBOL   [line 004]  4 +
 -SYMBOL   [line 004]  5;
 -ID       [line 005]  return

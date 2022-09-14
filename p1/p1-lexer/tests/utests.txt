@@ -1,4 +1,3 @@
 Running suite(s): Default
-90%: Checks: 20, Failures: 1, Errors: 1
+95%: Checks: 20, Failures: 1, Errors: 0
 public.c:38:F:Public:A_keyword_id:0: Assertion 'valid_1token("int3", ID, "int3")' failed
-private.c:5:E:Private:A_null_string:0: (after this point) Received signal 11 (Segmentation fault)

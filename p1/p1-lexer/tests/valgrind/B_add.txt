@@ -1,8 +1,8 @@
-==26903== Memcheck, a memory error detector
-==26903== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==26903== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==26903== Command: ../decaf inputs/add.decaf
-==26903== 
+==4122105== Memcheck, a memory error detector
+==4122105== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4122105== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==4122105== Command: ../decaf inputs/add.decaf
+==4122105== 
 KEYWORD  [line 001]  def
 KEYWORD  [line 001]  int
 ID       [line 001]  main
@@ -20,6 +20,7 @@ ID       [line 005]  return
 ID       [line 005]  a
 SYMBOL   [line 005]  ;
 SYMBOL   [line 006]  }
+<<<<<<< HEAD
 ==26903== 
 ==26903== HEAP SUMMARY:
 ==26903==     in use at exit: 5,792 bytes in 43 blocks
@@ -35,3 +36,20 @@ SYMBOL   [line 006]  }
 ==26903== 
 ==26903== For lists of detected and suppressed errors, rerun with: -s
 ==26903== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+=======
+==4122105== 
+==4122105== HEAP SUMMARY:
+==4122105==     in use at exit: 1,548 bytes in 38 blocks
+==4122105==   total heap usage: 900 allocs, 862 frees, 146,960 bytes allocated
+==4122105== 
+==4122105== LEAK SUMMARY:
+==4122105==    definitely lost: 64 bytes in 1 blocks
+==4122105==    indirectly lost: 1,484 bytes in 37 blocks
+==4122105==      possibly lost: 0 bytes in 0 blocks
+==4122105==    still reachable: 0 bytes in 0 blocks
+==4122105==         suppressed: 0 bytes in 0 blocks
+==4122105== Rerun with --leak-check=full to see details of leaked memory
+==4122105== 
+==4122105== For lists of detected and suppressed errors, rerun with: -s
+==4122105== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+>>>>>>> 9c3fbe25a27e8607d5fe0c5fb0abe5200df968f6
