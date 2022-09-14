@@ -1,5 +1,7 @@
 DECLIT   [line 001]  39
-DECLIT   [line 002]  skdnbsljfd
-asd slj 203
-DECLIT   [line 003]  c
-0x348
+ID       [line 001]  skdnbsljfd
+ID       [line 002]  asd
+ID       [line 002]  slj
+DECLIT   [line 002]  203
+ID       [line 002]  c
+HEXLIT   [line 003]  0x348
