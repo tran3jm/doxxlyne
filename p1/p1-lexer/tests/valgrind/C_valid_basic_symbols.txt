@@ -1,8 +1,8 @@
-==3683553== Memcheck, a memory error detector
-==3683553== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3683553== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==3683553== Command: ../decaf inputs/valid_symbols_c.decaf
-==3683553== 
+==4101371== Memcheck, a memory error detector
+==4101371== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4101371== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==4101371== Command: ../decaf inputs/valid_symbols_c.decaf
+==4101371== 
 SYMBOL   [line 001]  (
 SYMBOL   [line 002]  )
 SYMBOL   [line 003]  +
@@ -11,18 +11,18 @@ SYMBOL   [line 005]  ?
 SYMBOL   [line 006]  *
 SYMBOL   [line 007]  :
 SYMBOL   [line 008]  ;
-==3683553== 
-==3683553== HEAP SUMMARY:
-==3683553==     in use at exit: 1,548 bytes in 38 blocks
-==3683553==   total heap usage: 789 allocs, 751 frees, 119,436 bytes allocated
-==3683553== 
-==3683553== LEAK SUMMARY:
-==3683553==    definitely lost: 64 bytes in 1 blocks
-==3683553==    indirectly lost: 1,484 bytes in 37 blocks
-==3683553==      possibly lost: 0 bytes in 0 blocks
-==3683553==    still reachable: 0 bytes in 0 blocks
-==3683553==         suppressed: 0 bytes in 0 blocks
-==3683553== Rerun with --leak-check=full to see details of leaked memory
-==3683553== 
-==3683553== For lists of detected and suppressed errors, rerun with: -s
-==3683553== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4101371== 
+==4101371== HEAP SUMMARY:
+==4101371==     in use at exit: 1,548 bytes in 38 blocks
+==4101371==   total heap usage: 789 allocs, 751 frees, 119,436 bytes allocated
+==4101371== 
+==4101371== LEAK SUMMARY:
+==4101371==    definitely lost: 64 bytes in 1 blocks
+==4101371==    indirectly lost: 1,484 bytes in 37 blocks
+==4101371==      possibly lost: 0 bytes in 0 blocks
+==4101371==    still reachable: 0 bytes in 0 blocks
+==4101371==         suppressed: 0 bytes in 0 blocks
+==4101371== Rerun with --leak-check=full to see details of leaked memory
+==4101371== 
+==4101371== For lists of detected and suppressed errors, rerun with: -s
+==4101371== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

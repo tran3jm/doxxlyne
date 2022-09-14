@@ -1,21 +1,21 @@
-==3683570== Memcheck, a memory error detector
-==3683570== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3683570== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==3683570== Command: ../decaf inputs/invalid_hex.decaf
-==3683570== 
+==4101394== Memcheck, a memory error detector
+==4101394== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4101394== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==4101394== Command: ../decaf inputs/invalid_hex.decaf
+==4101394== 
 Invalid token!
-==3683570== 
-==3683570== HEAP SUMMARY:
-==3683570==     in use at exit: 76,772 bytes in 681 blocks
-==3683570==   total heap usage: 821 allocs, 140 frees, 125,920 bytes allocated
-==3683570== 
-==3683570== LEAK SUMMARY:
-==3683570==    definitely lost: 656 bytes in 11 blocks
-==3683570==    indirectly lost: 76,116 bytes in 670 blocks
-==3683570==      possibly lost: 0 bytes in 0 blocks
-==3683570==    still reachable: 0 bytes in 0 blocks
-==3683570==         suppressed: 0 bytes in 0 blocks
-==3683570== Rerun with --leak-check=full to see details of leaked memory
-==3683570== 
-==3683570== For lists of detected and suppressed errors, rerun with: -s
-==3683570== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4101394== 
+==4101394== HEAP SUMMARY:
+==4101394==     in use at exit: 76,772 bytes in 681 blocks
+==4101394==   total heap usage: 821 allocs, 140 frees, 125,920 bytes allocated
+==4101394== 
+==4101394== LEAK SUMMARY:
+==4101394==    definitely lost: 656 bytes in 11 blocks
+==4101394==    indirectly lost: 76,116 bytes in 670 blocks
+==4101394==      possibly lost: 0 bytes in 0 blocks
+==4101394==    still reachable: 0 bytes in 0 blocks
+==4101394==         suppressed: 0 bytes in 0 blocks
+==4101394== Rerun with --leak-check=full to see details of leaked memory
+==4101394== 
+==4101394== For lists of detected and suppressed errors, rerun with: -s
+==4101394== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
