@@ -1,4 +1,6 @@
 B_add                          FAIL (see outputs/B_add.diff for details)
+B_string_with_escape_codes     pass
+B_symbols                      pass
 C_valid_hex                    pass
 C_valid_string                 pass
 C_valid_basic_symbols          pass
@@ -7,6 +9,8 @@ C_invalid_hex                  pass
 C_invalid_string               pass
 Memory leak(s) found. See files listed below for details.
   - valgrind/B_add.txt
+  - valgrind/B_string_with_escape_codes.txt
+  - valgrind/B_symbols.txt
   - valgrind/C_ignore_whitespace.txt
   - valgrind/C_invalid_hex.txt
   - valgrind/C_invalid_string.txt

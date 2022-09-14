@@ -4,6 +4,8 @@
 #    <ARGS>     command-line arguments to test
 
 run_test    B_add                       "inputs/add.decaf"
+run_test    B_string_with_escape_codes  "inputs/string_ex_codes.decaf"
+run_test    B_symbols                   "inputs/symbols.decaf"
 run_test    C_valid_hex                 "inputs/valid_hex.decaf"
 run_test    C_valid_string              "inputs/valid_string_c.decaf"
 run_test    C_valid_basic_symbols       "inputs/valid_symbols_c.decaf"
