@@ -1,24 +1,24 @@
-==4122115== Memcheck, a memory error detector
-==4122115== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4122115== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==4122115== Command: ../decaf inputs/valid_hex.decaf
-==4122115== 
+==56894== Memcheck, a memory error detector
+==56894== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==56894== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==56894== Command: ../decaf inputs/valid_hex.decaf
+==56894== 
 HEXLIT   [line 001]  0x340
 HEXLIT   [line 002]  0xD34
 HEXLIT   [line 003]  0xd45
 HEXLIT   [line 004]  0x9a2b
-==4122115== 
-==4122115== HEAP SUMMARY:
-==4122115==     in use at exit: 1,548 bytes in 38 blocks
-==4122115==   total heap usage: 788 allocs, 750 frees, 126,672 bytes allocated
-==4122115== 
-==4122115== LEAK SUMMARY:
-==4122115==    definitely lost: 64 bytes in 1 blocks
-==4122115==    indirectly lost: 1,484 bytes in 37 blocks
-==4122115==      possibly lost: 0 bytes in 0 blocks
-==4122115==    still reachable: 0 bytes in 0 blocks
-==4122115==         suppressed: 0 bytes in 0 blocks
-==4122115== Rerun with --leak-check=full to see details of leaked memory
-==4122115== 
-==4122115== For lists of detected and suppressed errors, rerun with: -s
-==4122115== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==56894== 
+==56894== HEAP SUMMARY:
+==56894==     in use at exit: 1,600 bytes in 38 blocks
+==56894==   total heap usage: 1,054 allocs, 1,016 frees, 130,260 bytes allocated
+==56894== 
+==56894== LEAK SUMMARY:
+==56894==    definitely lost: 64 bytes in 1 blocks
+==56894==    indirectly lost: 1,536 bytes in 37 blocks
+==56894==      possibly lost: 0 bytes in 0 blocks
+==56894==    still reachable: 0 bytes in 0 blocks
+==56894==         suppressed: 0 bytes in 0 blocks
+==56894== Rerun with --leak-check=full to see details of leaked memory
+==56894== 
+==56894== For lists of detected and suppressed errors, rerun with: -s
+==56894== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

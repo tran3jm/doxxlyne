@@ -9,7 +9,7 @@
 TokenQueue* lex (char* text)
 {
     if(text == NULL || (strncmp(text, "\0", 1) == 0)) {
-        Error_throw_printf("NULL or Invalid input!\n");
+        Error_throw_printf("NULL or Invalid input text!\n");
         return NULL;
     }
     TokenQueue* tokens = TokenQueue_new();
