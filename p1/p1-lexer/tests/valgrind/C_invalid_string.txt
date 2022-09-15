@@ -1,15 +1,15 @@
-==732572== Memcheck, a memory error detector
-==732572== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==732572== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==732572== Command: ../decaf inputs/invalid_string.decaf
-==732572== 
+==958902== Memcheck, a memory error detector
+==958902== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==958902== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==958902== Command: ../decaf inputs/invalid_string.decaf
+==958902== 
 Invalid token!
-==732572== 
-==732572== HEAP SUMMARY:
-==732572==     in use at exit: 0 bytes in 0 blocks
-==732572==   total heap usage: 1,376 allocs, 1,376 frees, 148,796 bytes allocated
-==732572== 
-==732572== All heap blocks were freed -- no leaks are possible
-==732572== 
-==732572== For lists of detected and suppressed errors, rerun with: -s
-==732572== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==958902== 
+==958902== HEAP SUMMARY:
+==958902==     in use at exit: 0 bytes in 0 blocks
+==958902==   total heap usage: 2,007 allocs, 2,007 frees, 196,984 bytes allocated
+==958902== 
+==958902== All heap blocks were freed -- no leaks are possible
+==958902== 
+==958902== For lists of detected and suppressed errors, rerun with: -s
+==958902== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

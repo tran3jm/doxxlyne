@@ -1,8 +1,8 @@
-==732480== Memcheck, a memory error detector
-==732480== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==732480== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==732480== Command: ../decaf inputs/ignore_whitespace.decaf
-==732480== 
+==958879== Memcheck, a memory error detector
+==958879== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==958879== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==958879== Command: ../decaf inputs/ignore_whitespace.decaf
+==958879== 
 DECLIT   [line 001]  39
 ID       [line 001]  skdnbsljfd
 ID       [line 002]  asd
@@ -10,12 +10,12 @@ ID       [line 002]  slj
 DECLIT   [line 002]  203
 ID       [line 002]  c
 HEXLIT   [line 003]  0x348
-==732480== 
-==732480== HEAP SUMMARY:
-==732480==     in use at exit: 0 bytes in 0 blocks
-==732480==   total heap usage: 1,546 allocs, 1,546 frees, 185,932 bytes allocated
-==732480== 
-==732480== All heap blocks were freed -- no leaks are possible
-==732480== 
-==732480== For lists of detected and suppressed errors, rerun with: -s
-==732480== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==958879== 
+==958879== HEAP SUMMARY:
+==958879==     in use at exit: 0 bytes in 0 blocks
+==958879==   total heap usage: 2,187 allocs, 2,187 frees, 238,884 bytes allocated
+==958879== 
+==958879== All heap blocks were freed -- no leaks are possible
+==958879== 
+==958879== For lists of detected and suppressed errors, rerun with: -s
+==958879== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

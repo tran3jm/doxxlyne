@@ -3,6 +3,7 @@
 #    <TAG>      used as the root for all filenames (i.e., "expected/$TAG.txt")
 #    <ARGS>     command-line arguments to test
 
+run_test    A_ignore_comments           "inputs/ignore_comments.decaf"
 run_test    B_add                       "inputs/add.decaf"
 run_test    B_string_with_escape_codes  "inputs/string_ex_codes.decaf"
 run_test    B_symbols                   "inputs/symbols.decaf"

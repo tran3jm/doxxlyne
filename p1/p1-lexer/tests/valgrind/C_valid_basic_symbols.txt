@@ -1,8 +1,8 @@
-==732434== Memcheck, a memory error detector
-==732434== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==732434== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==732434== Command: ../decaf inputs/valid_symbols_c.decaf
-==732434== 
+==958868== Memcheck, a memory error detector
+==958868== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==958868== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==958868== Command: ../decaf inputs/valid_symbols_c.decaf
+==958868== 
 SYMBOL   [line 001]  (
 SYMBOL   [line 002]  )
 SYMBOL   [line 003]  +
@@ -11,12 +11,12 @@ SYMBOL   [line 005]  ?
 SYMBOL   [line 006]  *
 SYMBOL   [line 007]  :
 SYMBOL   [line 008]  ;
-==732434== 
-==732434== HEAP SUMMARY:
-==732434==     in use at exit: 0 bytes in 0 blocks
-==732434==   total heap usage: 1,370 allocs, 1,370 frees, 155,776 bytes allocated
-==732434== 
-==732434== All heap blocks were freed -- no leaks are possible
-==732434== 
-==732434== For lists of detected and suppressed errors, rerun with: -s
-==732434== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==958868== 
+==958868== HEAP SUMMARY:
+==958868==     in use at exit: 0 bytes in 0 blocks
+==958868==   total heap usage: 2,063 allocs, 2,063 frees, 211,772 bytes allocated
+==958868== 
+==958868== All heap blocks were freed -- no leaks are possible
+==958868== 
+==958868== For lists of detected and suppressed errors, rerun with: -s
+==958868== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

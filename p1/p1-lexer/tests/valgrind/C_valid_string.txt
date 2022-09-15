@@ -1,17 +1,17 @@
-==732420== Memcheck, a memory error detector
-==732420== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==732420== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==732420== Command: ../decaf inputs/valid_string_c.decaf
-==732420== 
+==958863== Memcheck, a memory error detector
+==958863== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==958863== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==958863== Command: ../decaf inputs/valid_string_c.decaf
+==958863== 
 STRLIT   [line 001]  ""
 STRLIT   [line 002]  "hey"
 STRLIT   [line 003]  "123poc_9sdl;"
-==732420== 
-==732420== HEAP SUMMARY:
-==732420==     in use at exit: 0 bytes in 0 blocks
-==732420==   total heap usage: 1,376 allocs, 1,376 frees, 158,748 bytes allocated
-==732420== 
-==732420== All heap blocks were freed -- no leaks are possible
-==732420== 
-==732420== For lists of detected and suppressed errors, rerun with: -s
-==732420== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==958863== 
+==958863== HEAP SUMMARY:
+==958863==     in use at exit: 0 bytes in 0 blocks
+==958863==   total heap usage: 2,017 allocs, 2,017 frees, 211,700 bytes allocated
+==958863== 
+==958863== All heap blocks were freed -- no leaks are possible
+==958863== 
+==958863== For lists of detected and suppressed errors, rerun with: -s
+==958863== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
