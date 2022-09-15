@@ -42,7 +42,7 @@ TokenQueue* lex (char* text)
 
     Regex* hex = Regex_new("^0x[a-fA-F0-9]+");
     Regex* string_literals = Regex_new("^\\\"[^\'\"]*\\\"");
-    Regex* valid_keywords = Regex_new("^def|^if|^else|^while|^break|^continue|^int|^bool|^void|^true|^false([^a-zA-Z0-9])");
+    Regex* valid_keywords = Regex_new("^\\b(def|if|else|while|break|continue|int|bool|void|true|false)\\b");
     Regex* invalid_keywords = Regex_new("^for|^callout|^class|^interface|^extends|^implements|^new|^string|^float|^double|^null");
     Regex* comments = Regex_new("//.*");
 
