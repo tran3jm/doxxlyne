@@ -6,6 +6,24 @@
  */
 #include "p1-lexer.h"
 
+/* Catch-all method for freeing all regexes...regexi? what is the plural of regex?*/
+void freeRegex(Regex* whitespace, Regex* space, Regex* symbols,\
+                Regex* int_constants, Regex* identifiers, Regex* hex,\
+                Regex* string_literals, Regex* valid_keywords,\
+                Regex* invalid_keywords, Regex* comments) 
+{
+    Regex_free(whitespace);
+    Regex_free(space);
+    Regex_free(symbols);
+    Regex_free(int_constants);
+    Regex_free(identifiers);
+    Regex_free(hex);
+    Regex_free(string_literals);
+    Regex_free(valid_keywords);
+    Regex_free(invalid_keywords);
+    Regex_free(comments);
+}
+
 TokenQueue* lex (char* text)
 {
     if(text == NULL || (strncmp(text, "\0", 1) == 0)) {
@@ -38,7 +56,7 @@ TokenQueue* lex (char* text)
         // Loop with some boolean variable, 
         // once it gets to the end of the line, 
         // then increment placeholder that way 
-        //multiple tokens can be on the same line
+        // multiple tokens can be on the same line
         
         /* match regular expressions */
         // printf("%s\n", text);
@@ -53,18 +71,23 @@ TokenQueue* lex (char* text)
             TokenQueue_add(tokens, Token_new(KEY, match, placeholder));
 
         } else if (Regex_match(invalid_keywords, text, match)) {
+            freeRegex(whitespace, space, symbols, int_constants, identifiers, hex,\
+                string_literals, valid_keywords, invalid_keywords, comments);
             Error_throw_printf("Invalid token!\n");
 
         } else if (Regex_match(identifiers, text, match)) {
             TokenQueue_add(tokens, Token_new(ID, match, placeholder));
             
         } else if (Regex_match(invalid_keywords, text, match)) {
+            freeRegex(whitespace, space, symbols, int_constants, identifiers, hex,\
+                string_literals, valid_keywords, invalid_keywords, comments);
             Error_throw_printf("Invalid token!\n");
 
         } else if (Regex_match(hex, text, match)) {
             TokenQueue_add(tokens, Token_new(HEXLIT, match, placeholder));
             
         } else if (Regex_match(string_literals, text, match)) {
+            //This line is causing memory leak due to the allocation of this token
             TokenQueue_add(tokens, Token_new(STRLIT, match, placeholder));
 
         } else if (Regex_match(identifiers, text, match)) {
@@ -77,8 +100,11 @@ TokenQueue* lex (char* text)
             TokenQueue_add(tokens, Token_new(DECLIT, match, placeholder));
 
         } else if (Regex_match(comments, text, match)) {
-
+            // Comments are useless, *he says in a comment*
         } else {
+            freeRegex(whitespace, space, symbols, int_constants, identifiers, hex,\
+                string_literals, valid_keywords, invalid_keywords, comments);
+            TokenQueue_free(tokens);
             Error_throw_printf("Invalid token!\n");
         }
 
@@ -88,15 +114,8 @@ TokenQueue* lex (char* text)
     }
  
     /* clean up */
-    Regex_free(whitespace);
-    Regex_free(symbols);
-    Regex_free(int_constants);
-    Regex_free(identifiers);
-    Regex_free(hex);
-    Regex_free(string_literals);
-    Regex_free(valid_keywords);
-    Regex_free(invalid_keywords);
-    Regex_free(comments);
+    freeRegex(whitespace, space, symbols, int_constants, identifiers, hex,\
+                string_literals, valid_keywords, invalid_keywords, comments);
     return tokens;
 }
 

@@ -1,0 +1,144 @@
+// CS 432 PROiECT 0: DECAF PROGRAMMING
+// Dakota Scott
+
+def int fact(int n)
+{
+    int b; // Place
+    int result;
+    if (n <= 0) {
+        b = 1;
+        return b;
+    } else {
+        result = fact(n-1);
+        b = n * result;
+        return b;
+    }
+}
+
+def int fib(int n)
+{
+    int result1;
+    int result2;
+    int c;
+    if (n <= 2) {
+        return 1;
+    } else {
+        result1 = fib(n-1);
+        result2 = fib(n-2);
+        c = result1 + result2;
+        return c;
+    }
+}
+
+def bool is_prime(int n)
+{
+    int i;
+	// 
+    if (n < 2) {
+        return false;
+    }
+	if (n == 2) {
+		return true;
+	}
+	// Even numbers are not prime
+    if (n % 2 == 0) {
+        return false;
+    } else {
+        i = 3;
+        while(i < n) {
+            if (n % i == 0) {
+                return false;
+            }
+            i = i + 1;
+        }
+        return true;
+    }
+}
+
+def int gcd(int a, int b)
+{
+	// Implemented basic euclidean algorithm
+	int c;
+	if (b==0) {
+		return a;
+	}
+	c = gcd(b, a % b);
+    return c;
+}
+
+int nums[100];
+def int sum_nums(int len)
+{
+    int i;
+    int total;
+    total = 0;
+    i = 0;
+	// looping through the array and adding to total
+    while(i < len) {
+        total = total + nums[i];
+        i = i + 1;
+    }
+    return total;
+}
+
+def void sort_nums(int len)
+{
+	// Basic bubble sort, similar to java but with declarations at the top.
+	int i;
+	int temp;
+	bool done;
+	temp = 0;
+	i = 0;
+	done = false;
+	while(!done) {
+		done = true;
+		i = 0;
+		while(i < (len - 1)) {
+			if(nums[i] > nums[i + 1]) {
+				temp = nums[i];
+				nums[i] = nums[i + 1];
+				nums[i + 1] = temp;
+				done = false;
+			}
+		i = i + 1;
+		}
+		
+	}
+    return;
+}
+
+def void draw_triangle(int base)
+{
+    int i;
+    i = base / 2;
+	// did the basic math and passed it to another method
+    while (i >= 0) {
+        print_line(base, i);
+        i = i - 1;
+    }
+    return;
+}
+
+def void print_line(int base, int level) {
+    int numhashes; 	// Number of hashes to be printed in one line
+    int offset;		// How many spaces before printing hashes
+    int pos;		// Current position of the character in the line
+    numhashes = base - (level * 2); // Calculating the number of hashmarks in the current level
+	if(numhashes > 0) {
+    	offset = (base - numhashes) / 2; // Calculating when to start printing hashmarks
+    	pos = 0; // local variable used to keep track of position in the line
+		
+		while (pos < offset) {
+			print_str(" ");
+			pos = pos + 1;
+		}
+		pos = 0;
+		while(pos < numhashes) {
+			print_str("#");
+			pos = pos + 1;
+		}
+		if(numhashes <= base) {
+			print_str("\n");
+		}
+	}
+}
