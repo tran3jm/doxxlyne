@@ -1,2 +1,6 @@
 Running suite(s): Default
-100%: Checks: 20, Failures: 0, Errors: 0
+80%: Checks: 20, Failures: 4, Errors: 0
+public.c:17:F:Public:D_invalid_symbol:0: Assertion 'invalid_tokens("^")' failed
+public.c:18:F:Public:D_invalid_id:0: Assertion 'invalid_tokens("_true")' failed
+public.c:21:F:Public:C_symbol:0: Assertion 'valid_1token("-", SYM, "-")' failed
+public.c:28:F:Public:B_symbol_equal:0: Assertion 'valid_1token("==", SYM, "==")' failed

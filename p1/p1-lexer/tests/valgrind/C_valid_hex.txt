@@ -1,18 +1,18 @@
-==606983== Memcheck, a memory error detector
-==606983== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==606983== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==606983== Command: ../decaf inputs/valid_hex.decaf
-==606983== 
+==732400== Memcheck, a memory error detector
+==732400== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==732400== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==732400== Command: ../decaf inputs/valid_hex.decaf
+==732400== 
 HEXLIT   [line 001]  0x340
 HEXLIT   [line 002]  0xD34
 HEXLIT   [line 003]  0xd45
 HEXLIT   [line 004]  0x9a2b
-==606983== 
-==606983== HEAP SUMMARY:
-==606983==     in use at exit: 0 bytes in 0 blocks
-==606983==   total heap usage: 1,501 allocs, 1,501 frees, 164,820 bytes allocated
-==606983== 
-==606983== All heap blocks were freed -- no leaks are possible
-==606983== 
-==606983== For lists of detected and suppressed errors, rerun with: -s
-==606983== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==732400== 
+==732400== HEAP SUMMARY:
+==732400==     in use at exit: 0 bytes in 0 blocks
+==732400==   total heap usage: 1,385 allocs, 1,385 frees, 161,188 bytes allocated
+==732400== 
+==732400== All heap blocks were freed -- no leaks are possible
+==732400== 
+==732400== For lists of detected and suppressed errors, rerun with: -s
+==732400== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

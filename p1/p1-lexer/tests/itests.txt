@@ -1,6 +1,6 @@
-B_add                          FAIL (see outputs/B_add.diff for details)
+B_add                          pass
 B_string_with_escape_codes     pass
-B_symbols                      pass
+B_symbols                      FAIL (see outputs/B_symbols.diff for details)
 C_valid_hex                    pass
 C_valid_string                 pass
 C_valid_basic_symbols          pass
