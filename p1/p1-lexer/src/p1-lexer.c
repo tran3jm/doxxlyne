@@ -33,18 +33,17 @@ TokenQueue* lex (char* text)
     TokenQueue* tokens = TokenQueue_new();
  
     /* compile regular expressions */
-    Regex* whitespace = Regex_new("^[ \n]");
+    Regex* whitespace = Regex_new("^[ \n\t]");
     Regex* space = Regex_new("^[ \t]");
     Regex* symbols = Regex_new("^((\\&{2})|\\|{2}|\\={1,2}|<=|>=|\\!\\=|\\/|"
         "\\(|\\)|\\+|\\*|\\-|\\!|\\=|\\,|\\?|\\:|\\;|\\{|\\}|(\\=\\=)|\\%|\\[|\\]|<|>)");
     Regex* int_constants = Regex_new("^0|[1-9]+[0-9]*");
     Regex* identifiers = Regex_new("^[a-zA-Z][0-9a-zA-Z_]*");
     Regex* hex = Regex_new("^0x[a-fA-F0-9]+");
-    Regex* string_literals = Regex_new("^\\\"[^\'\"]*\\\"");
+    Regex* string_literals = Regex_new("^\\\"[^\'\")]*\\\"");
     Regex* valid_keywords = Regex_new("^\\b(def|if|else|while|break|return|continue|int|bool|void|true|false)\\b");
-    Regex* invalid_keywords = Regex_new("^for|^callout|^class|^interface|^extends|^implements|^new|^string|^float|^double|^null");
+    Regex* invalid_keywords = Regex_new("^\\b(for|^callout|^class|^interface|^extends|^implements|^new|^string|^float|^double|^null)\\b");
     Regex* comments = Regex_new("^\\/{2}[^\r\n]*");
-
     /* read and handle input */
     char match[MAX_TOKEN_LEN];
     
@@ -64,7 +63,7 @@ TokenQueue* lex (char* text)
             if (text[0] == '\n') {
                 placeholder++;
             }
-        } else if (Regex_match(space, text, match)) {
+        // } else if (Regex_match(space, text, match)) {
 
         } else if (Regex_match(comments, text, match)) {
             // Comments are useless, *he says in a comment* i agree *she also says in a comment*
