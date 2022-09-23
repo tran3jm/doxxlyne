@@ -1,0 +1,3 @@
+STRLIT   [line 001]  ""
+STRLIT   [line 002]  "hey"
+STRLIT   [line 003]  "123poc_9sdl;"
