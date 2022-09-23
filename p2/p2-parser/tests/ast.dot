@@ -1,3 +1,0 @@
-digraph AST {
-0 [shape=box, label="Program"];
-}

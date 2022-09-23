@@ -1,7 +1,7 @@
---- outputs/A_sourceinfo.txt	2022-09-22 23:03:48.591214958 -0400
+--- outputs/A_sourceinfo.txt	2022-09-23 14:56:34.136510204 -0400
 +++ expected/A_sourceinfo.txt	2022-08-19 09:55:11.000000000 -0400
-@@ -1 +1,11 @@
- Program [line 1]
+@@ -0,0 +1,11 @@
++Program [line 1]
 +  FuncDecl name="main" return_type=int parameters={} [line 1]
 +    Block [line 2]
 +      VarDecl name="a" type=int is_array=no array_length=1 [line 3]

@@ -1,6 +1,9 @@
 /**
  * @file p2-parser.c
  * @brief Compiler phase 2: parser
+ * 
+ * Names: Joselyne Tran and Dakota Scott
+ * 
  */
 
 #include "p2-parser.h"
@@ -137,39 +140,30 @@ void parse_id (TokenQueue* input, char* buffer)
     Token_free(token);
 }
 
-ASTNode* parse_variable_declaration (TokenQueue* input) 
+ASTNode* parse_vardecl (TokenQueue* input) 
 {
-    char identifier[MAX_ID_LEN];
+    char identifier[MAX_TOKEN_LEN];
+    int lineNum = get_next_token_line(input);
     DecafType variable_type = parse_type(input);
     parse_id(input, identifier);
-    return VarDeclNode_new(variable_type, identifier, false, 0, 0);
+    match_and_discard_next_token(input, SYM, ";");
+    return VarDeclNode_new(identifier, variable_type, false, 1, lineNum);
 }
 
-/*
- * node-level parsing functions
- */
 ASTNode* parse_program (TokenQueue* input)
 {
     NodeList* vars = NodeList_new();
     NodeList* funcs = NodeList_new();
     
-    ASTNode* root = parse_term(input);
-
+    // ASTNode* root = parse_term(input);
+    while (!TokenQueue_is_empty(input)) {
+        NodeList_add(vars, parse_vardecl(input));
+    }
 
     return ProgramNode_new(vars, funcs);
 }
 
 ASTNode* parse (TokenQueue* input)
 {
-    ASTNode* root = parse_program(input);
-
-    if (!TokenQueue_is_empty(input)) {
-        Token* t = TokenQueue_remove(input);
-        printf("Error: Extraneous input: \"%s\"\n", t->text);
-        exit(EXIT_FAILURE);
-    }
-
-    TokenQueue_free(input);
-
-    return root;
+    return parse_program(input);
 }
