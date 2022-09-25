@@ -1,4 +1,5 @@
 HEXLIT   [line 001]  0x340
-HEXLIT   [line 002]  0xD34
+DECLIT   [line 002]  0
+ID       [line 002]  xD34
 HEXLIT   [line 003]  0xd45
 HEXLIT   [line 004]  0x9a2b

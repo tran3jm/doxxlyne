@@ -1,17 +1,17 @@
-==421181== Memcheck, a memory error detector
-==421181== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==421181== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==421181== Command: ../decaf inputs/valid_string_c.decaf
-==421181== 
+==2401974== Memcheck, a memory error detector
+==2401974== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2401974== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==2401974== Command: ../decaf inputs/valid_string_c.decaf
+==2401974== 
 STRLIT   [line 001]  ""
 STRLIT   [line 002]  "hey"
 STRLIT   [line 003]  "123poc_9sdl;"
-==421181== 
-==421181== HEAP SUMMARY:
-==421181==     in use at exit: 0 bytes in 0 blocks
-==421181==   total heap usage: 2,917 allocs, 2,917 frees, 265,400 bytes allocated
-==421181== 
-==421181== All heap blocks were freed -- no leaks are possible
-==421181== 
-==421181== For lists of detected and suppressed errors, rerun with: -s
-==421181== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2401974== 
+==2401974== HEAP SUMMARY:
+==2401974==     in use at exit: 0 bytes in 0 blocks
+==2401974==   total heap usage: 4,056 allocs, 4,056 frees, 354,820 bytes allocated
+==2401974== 
+==2401974== All heap blocks were freed -- no leaks are possible
+==2401974== 
+==2401974== For lists of detected and suppressed errors, rerun with: -s
+==2401974== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

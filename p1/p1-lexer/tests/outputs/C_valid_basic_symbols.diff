@@ -1,0 +1,11 @@
+--- outputs/C_valid_basic_symbols.txt	2022-09-23 10:56:43.481761022 -0400
++++ expected/C_valid_basic_symbols.txt	2022-09-13 20:32:16.540901561 -0400
+@@ -0,0 +1,8 @@
++SYMBOL   [line 001]  (
++SYMBOL   [line 002]  )
++SYMBOL   [line 003]  +
++SYMBOL   [line 004]  !
++SYMBOL   [line 005]  ?
++SYMBOL   [line 006]  *
++SYMBOL   [line 007]  :
++SYMBOL   [line 008]  ;

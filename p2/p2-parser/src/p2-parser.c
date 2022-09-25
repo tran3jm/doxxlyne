@@ -3,7 +3,6 @@
  * @brief Compiler phase 2: parser
  * 
  * Names: Joselyne Tran and Dakota Scott
- * 
  */
 
 #include "p2-parser.h"
