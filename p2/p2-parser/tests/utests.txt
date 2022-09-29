@@ -1,5 +1,5 @@
 Running suite(s): Default
-40%: Checks: 30, Failures: 13, Errors: 5
+43%: Checks: 30, Failures: 13, Errors: 4
 public.c:46:F:Public:C_void_func:0: Assertion 'valid_program("def void foo() { }")' failed
 public.c:47:F:Public:C_assign:0: Assertion 'valid_program("def int main () { " "int a; a = 5;" " }")' failed
 public.c:48:F:Public:C_break:0: Assertion 'valid_program("def int main () { " "break;" " }")' failed
@@ -17,4 +17,3 @@ public.c:56:F:Public:B_add_expr_bool:0: Assertion 'valid_program("def int main (
 public.c:57:F:Public:B_neg_expr:0: Assertion 'valid_program("def int main () { return " "-2" " ; }")' failed
 public.c:58:F:Public:A_arrays:0: Assertion 'valid_program("int a[5]; def int main() { a[1] = 7; return a[1]; }")' failed
 public.c:81:E:Public:A_newline:0: (after this point) Received signal 11 (Segmentation fault)
-private.c:5:E:Private:A_null_token_queue:0: (after this point) Received signal 11 (Segmentation fault)

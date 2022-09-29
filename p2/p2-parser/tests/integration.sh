@@ -54,7 +54,7 @@ function run_test {
         fi
 
         # run valgrind
-        valgrind $EXE $ARGS &>$VALGRND
+        valgrind --verbose $EXE $ARGS &>$VALGRND
     else
         echo "$PTAG FAIL (timeout)"
     fi

@@ -108,20 +108,33 @@ DecafType parse_type (TokenQueue* input)
     if (token->type != KEY) {
         Error_throw_printf("Invalid type '%s' on line %d\n", token->text, get_next_token_line(input));
     }
+
     DecafType t = VOID;
     if (token_str_eq("int", token->text)) {
+        //printf("%s", token->text);
+
         t = INT;
     } else if (token_str_eq("bool", token->text)) {
+        //printf("%s", token->text);
+
         t = BOOL;
     } else if (token_str_eq("void", token->text)) {
+        //printf("%s", token->text);
+
         t = VOID;
     } else {
+
         Error_throw_printf("Invalid type '%s' on line %d\n", token->text, get_next_token_line(input));
     }
+    //printf("%s, %d", token->text, token->type);
+
     Token_free(token);
     return t;
 }
-
+//Used for debugging, didn't feel like typing printf every time
+void print(char* str) {
+    printf("%s", str);
+}
 /**
  * @brief Parse and return a Decaf identifier
  * 
@@ -149,20 +162,51 @@ ASTNode* parse_vardecl (TokenQueue* input)
     return VarDeclNode_new(identifier, variable_type, false, 1, lineNum);
 }
 
+ASTNode* parse_funcdecl (TokenQueue* input) {
+    int source_line = get_next_token_line(input);
+    //printf("%s", input->head->text);
+    //printf("%s", TokenQueue_remove(input)->type);
+    //printf("%s", input->head->text);
+    char* def_word = TokenQueue_remove(input)->text;
+    // printf("%s", def_word);
+    //Something needs to be done in order to not send "def" to parse_type
+    DecafType return_type = parse_type(input);
+    printf("%d", return_type);
+    char func_name[MAX_TOKEN_LEN]; 
+    parse_id(input, func_name);
+    // printf("%s", func_name);
+
+    ParameterList* parameters = ParameterList_new();
+    ASTNode* body = ASTNode_new(BLOCK, source_line);
+    // printf("%s", func_name);
+
+    return FuncDeclNode_new(func_name, return_type, parameters, body, source_line);
+}
+
 ASTNode* parse_program (TokenQueue* input)
 {
     NodeList* vars = NodeList_new();
     NodeList* funcs = NodeList_new();
-    
-    // ASTNode* root = parse_term(input);
-    while (!TokenQueue_is_empty(input)) {
-        NodeList_add(vars, parse_vardecl(input));
+    //char token_buffer[MAX_TOKEN_LEN];
+    //Token* curr_tok;
+    while (!TokenQueue_is_empty(input))
+    {
+        if (check_next_token(input, KEY, "def"))
+        {
+            NodeList_add(funcs, parse_funcdecl(input));
+        }
+        else
+        {
+            NodeList_add(vars, parse_vardecl(input));
+        }
     }
-
     return ProgramNode_new(vars, funcs);
 }
 
 ASTNode* parse (TokenQueue* input)
 {
+    if (input == NULL) {
+        Error_throw_printf("Null Input");
+    }
     return parse_program(input);
 }
