@@ -152,37 +152,239 @@ void parse_id (TokenQueue* input, char* buffer)
     Token_free(token);
 }
 
-ASTNode* parse_vardecl (TokenQueue* input) 
-{
+/**
+ * @brief Parse and return a literal
+ * 
+ * @param input Token queue to modify
+ */
+ASTNode* parse_literal(TokenQueue* input) {
+    Token* token = TokenQueue_remove(input);
+    int lineNum = get_next_token_line(input);
+
+    //
+    if (token->type == DECLIT) {
+        return LiteralNode_new_int(atoi(token->text), lineNum);
+
+    } else if (token->type == HEXLIT) {
+        return LiteralNode_new_int((int)strtol(token->text, NULL, 16), lineNum);
+    
+    } else if (token->type == STRLIT) {
+        char *result = token->text+1; // removes first character
+        result[strlen(result)-1] = '\0'; // removes last character
+        return LiteralNode_new_string(result, lineNum);
+
+    } else if ( token_str_eq("true", token->text) ) {
+        return LiteralNode_new_bool(true, lineNum);
+
+    } else if (token_str_eq("false", token->text) ) {
+        return LiteralNode_new_bool(false, lineNum);
+
+    } else {
+        Error_throw_printf("Invalid type '%s' on line %d\n", token->text, get_next_token_line(input));
+
+    }
+
+    Token_free(token);
+    return NULL;
+}
+
+/**
+ * @brief Parse and return a location node
+ * 
+ * @param input Token queue to modify
+ * @c MAX_TOKEN_LEN characters long)
+ */
+ASTNode* parse_location(TokenQueue* input) {
     char identifier[MAX_TOKEN_LEN];
     int lineNum = get_next_token_line(input);
+    ASTNode* index = NULL;
+    parse_id(input, identifier);
+
+    // checking for index
+    if (check_next_token(input, SYM, "[")) {
+        match_and_discard_next_token (input, SYM, "[");
+
+        // literal is place holder because we don't have the other expressions set up
+        index = parse_literal(input);
+        match_and_discard_next_token (input, SYM, "]");
+    }
+
+    return LocationNode_new (identifier, index, lineNum);
+}
+
+
+/**
+ * @brief Parse and return a block node
+ *        ONLY HANDLING LOCATIONS AND LITERALS FOR NOW. *****
+ * 
+ * @param input Token queue to modify
+ */
+ASTNode* parse_base_expressions(TokenQueue* input) {
+    ASTNode* node = NULL;
+    if (check_next_token_type(input, ID)) {
+        node = parse_location(input);
+    } else {
+        node = parse_literal(input);
+    }
+    return node;
+}
+
+/**
+ * @brief Parse and return a block node
+ *        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+ * 
+ * @param input Token queue to modify
+ */
+ASTNode* parse_expressions(TokenQueue* input) {
+    ASTNode* expression = parse_base_expressions(input);
+    return expression;
+}
+
+/**
+ * @brief Parse and return a Variable declaration node
+ * 
+ * @param input Token queue to modify
+ * @c MAX_TOKEN_LEN characters long)
+ */
+ASTNode* parse_vardecl (TokenQueue* input) 
+{
+    // setting up id buffer and line number
+    char identifier[MAX_TOKEN_LEN];
+    int lineNum = get_next_token_line(input);
+
+    // finds variable type, identifier, and semicolon
     DecafType variable_type = parse_type(input);
     parse_id(input, identifier);
     match_and_discard_next_token(input, SYM, ";");
+
     return VarDeclNode_new(identifier, variable_type, false, 1, lineNum);
 }
 
+/**
+ * @brief Parse and return a block node
+ * 
+ * @param input Token queue to modify
+ */
+ASTNode* parse_block(TokenQueue* input) {
+
+    NodeList* vars = NodeList_new();
+    NodeList* stments = NodeList_new();
+
+    Token* token = TokenQueue_peek(input);
+    int lineNum = get_next_token_line(input);
+
+    // make sure variable declarations go first'
+    while (token_str_eq("bool", token->text) || 
+            token_str_eq("int", token->text) || 
+            token_str_eq("void", token->text)) {
+        NodeList_add(vars, parse_vardecl(input));
+        token = TokenQueue_peek(input);
+    }
+
+    // parsing for statements
+    while (!check_next_token(input, SYM, "}")) {
+        lineNum = get_next_token_line(input);
+        // if next time is identifier, most likely start of assignment?
+        if (check_next_token_type(input, ID)) {
+            ASTNode* loc = parse_location(input);
+            match_and_discard_next_token (input, SYM, "=");
+            ASTNode* lit = parse_literal(input);
+            match_and_discard_next_token (input, SYM, ";");
+
+            // check for same location type and literal type
+            NodeList_add(stments, AssignmentNode_new(loc, lit, lineNum));
+            
+        }
+        else if ( token_str_eq("return", token->text) ) {
+            ASTNode* expression = NULL;
+            discard_next_token(input);
+            if (!check_next_token(input, SYM, ";")) {
+                expression = parse_expressions(input);
+            }
+            match_and_discard_next_token(input, SYM, ";");
+            NodeList_add(stments, ReturnNode_new(expression, lineNum));
+
+        } else if (token_str_eq("continue", token->text) ) {
+            discard_next_token(input);
+            match_and_discard_next_token(input, SYM, ";");
+            NodeList_add(stments, ContinueNode_new(lineNum));
+
+        } else if (token_str_eq("break", token->text) ) {
+            discard_next_token(input);
+            match_and_discard_next_token(input, SYM, ";");
+            NodeList_add(stments, BreakNode_new(lineNum));
+
+        } else {
+            Error_throw_printf("Invalid type '%s' on line %d\n", token->text, get_next_token_line(input));
+        }
+    }
+
+    return BlockNode_new(vars, stments, lineNum);
+}
+
+
+/**
+ * @brief Parse and returns parameters list
+ * 
+ * @param input Token queue to modify
+ */
+ParameterList* parse_parameters_list(TokenQueue* input) {
+    ParameterList* parameterlist = ParameterList_new();
+    char param_id[MAX_TOKEN_LEN]; 
+
+    DecafType param_type = parse_type(input);
+    parse_id(input, param_id);
+    ParameterList_add_new (parameterlist, param_id, param_type);
+
+    while (check_next_token(input, SYM, ",")) {
+        memset(param_id, 0, sizeof(param_id));
+        param_type = parse_type(input);
+        parse_id(input, param_id);
+        ParameterList_add_new (parameterlist, param_id, param_type);
+    }
+
+    return parameterlist;
+}
+
+/**
+ * @brief Parse and returns function node
+ * 
+ * @param input Token queue to modify
+ */
 ASTNode* parse_funcdecl (TokenQueue* input) {
+
+    // initialize variables
     int source_line = get_next_token_line(input);
-    //printf("%s", input->head->text);
-    //printf("%s", TokenQueue_remove(input)->type);
-    //printf("%s", input->head->text);
-    char* def_word = TokenQueue_remove(input)->text;
-    // printf("%s", def_word);
-    //Something needs to be done in order to not send "def" to parse_type
-    DecafType return_type = parse_type(input);
-    printf("%d", return_type);
     char func_name[MAX_TOKEN_LEN]; 
-    parse_id(input, func_name);
-    // printf("%s", func_name);
-
     ParameterList* parameters = ParameterList_new();
-    ASTNode* body = ASTNode_new(BLOCK, source_line);
-    // printf("%s", func_name);
 
+    // discard def
+    discard_next_token(input);
+
+    // finds return type and function name
+    DecafType return_type = parse_type(input);
+    parse_id(input, func_name);
+
+    // finds parameters if any
+    match_and_discard_next_token (input, SYM, "(");
+    if (!check_next_token(input, SYM, ")")) {
+        parameters = parse_parameters_list(input);
+    }
+    match_and_discard_next_token (input, SYM, ")");
+
+    // parse block node
+    match_and_discard_next_token (input, SYM, "{");
+    ASTNode* body = parse_block(input);
+    match_and_discard_next_token (input, SYM, "}");
     return FuncDeclNode_new(func_name, return_type, parameters, body, source_line);
 }
 
+
+/**
+ * @brief Parsing and building tree off of program
+ * 
+ * @param input Token queue to modify
+ */
 ASTNode* parse_program (TokenQueue* input)
 {
     NodeList* vars = NodeList_new();
@@ -210,3 +412,5 @@ ASTNode* parse (TokenQueue* input)
     }
     return parse_program(input);
 }
+
+
