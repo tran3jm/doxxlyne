@@ -1,1 +1,6 @@
-def main() { int arr[10]; arr[4] = 6; return arr[4]; }
+def int main() 
+{ 
+    int arr[10]; 
+    arr[4] = 6; 
+    return arr[4]; 
+}
