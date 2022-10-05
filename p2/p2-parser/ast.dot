@@ -1,12 +1,12 @@
 digraph AST {
 4 [shape=box, label="Location name='value'"];
-5 [shape=box, label="Literal value='234'"];
+5 [shape=box, label="Literal value=20"];
 3 [shape=box, label="Assignment"];
 3 -> 4;
 3 -> 5;
 2 [shape=box, label="Block"];
 2 -> 3;
-1 [shape=box, label="FuncDecl name='main'"];
+1 [shape=box, label="FuncDecl name='foo'"];
 1 -> 2;
 0 [shape=box, label="Program"];
 0 -> 1;

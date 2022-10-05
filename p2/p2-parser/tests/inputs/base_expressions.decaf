@@ -1,4 +1,4 @@
-def int main()
-{
-    value = "234";
+def int foo(int a, bool b) 
+{ 
+    value = (20);
 }
