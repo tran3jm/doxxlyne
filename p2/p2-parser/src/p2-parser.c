@@ -363,11 +363,11 @@ ASTNode* parse_block(TokenQueue* input) {
            Error_throw_printf("Invalid type '%s' on line %d\n", token->text, get_next_token_line(input));
        }
    }
- 
+
    return BlockNode_new(vars, stments, lineNum);
 }
- 
- 
+
+
 /**
 * @brief Parse and returns parameters list
 *
@@ -391,7 +391,88 @@ ParameterList* parse_parameters_list(TokenQueue* input) {
  
    return parameterlist;
 }
- 
+
+/**
+* @brief Parse and returns BinaryOperatorType
+*
+* @param input Token queue to modify
+* @param source_line Line the operand occurs on 
+*/
+BinaryOpType parse_operator(TokenQueue *input, int source_line) {
+    // Popping off token and creating placeholder variable for return value
+    Token* token = TokenQueue_remove(input);
+    BinaryOpType t = OROP;
+    // Set of if statements identifying the specific operator
+    // Or if it is not valid, throws an error
+    if (strcmp("||", token->text) == 0) {
+        t = OROP;
+    } else if (strcmp("&&", token->text) == 0) {
+        t = ANDOP;
+    } else if (strcmp("==", token->text) == 0) {
+        t = EQOP;
+    } else if (strcmp("!=", token->text) == 0) {
+        t = NEQOP;
+    } else if (strcmp("<", token->text) == 0) {
+        t = LTOP;
+    } else if (strcmp(">", token->text) == 0) {
+        t = GTOP;
+    } else if (strcmp("<=", token->text) == 0) {
+        t = LEOP;
+    } else if (strcmp(">=", token->text) == 0) {
+        t = GEOP;
+    } else if (strcmp("+", token->text) == 0) {
+        t = ADDOP;
+    } else if (strcmp("-", token->text) == 0) {
+        t = SUBOP;
+    } else if (strcmp("*", token->text) == 0) {
+        t = MULOP;
+    } else if (strcmp("/", token->text) == 0) {
+        t = DIVOP;
+    } else if (strcmp("%%", token->text) == 0) {
+        t = MODOP;
+    } else { // The token present is not a valid operator
+        Error_throw_printf("Invalid Operator: %s on Line: %d", token->text, source_line);
+    }
+    return t;
+}
+
+/**
+* @brief Parse and returns Operand ASTNode
+*
+* @param input Token queue to modify
+* @param source_line Line the operand occurs on 
+*/
+ASTNode* parse_operand(TokenQueue* input, int source_line) {
+    // Pulling off the top token and creating a temporary variable to hold return balue
+    Token* op_token     = TokenQueue_remove(input);
+    ASTNode* operand    = NULL;
+    // Check if the token type is literal, then passing to parse_literal
+    if (strcmp("Literal", NodeType_to_string(op_token->type)) == 0) {
+        operand = parse_literal(input);
+    // If not a literal, passes to try and get the value on the left
+    } else if(strcmp("Assignment", NodeType_to_string(op_token->type)) == 0) {
+        ASTNode* loc = parse_location(input);
+        ASTNode* val = NULL;
+        operand = AssignmentNode_new(loc, val, source_line);
+    } else { // If neither Literal value or Variable value, not a valid operand
+        Error_throw_printf("Invalid type while parsing binary op: %s, on line: %d", op_token->text, source_line);
+    }
+    return operand;
+}
+/**
+* @brief Parse and returns Binary Operator ASTNode
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_binOp(TokenQueue* input) {
+    //Takes input tokenqueue and passes to appropriate methods
+    int source_line         = get_next_token_line(input);
+    ASTNode* l_operand      = parse_operand(input, source_line);
+    BinaryOpType operator   = parse_operator(input, source_line);
+    ASTNode* r_operand      = parse_operand(input, source_line);
+    ASTNode* binOp          = BinaryOpNode_new(operator, l_operand, r_operand, source_line);
+    return binOp;
+}
 /**
 * @brief Parse and returns function node
 *
