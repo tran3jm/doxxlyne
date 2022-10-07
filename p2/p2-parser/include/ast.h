@@ -273,7 +273,7 @@ struct ASTNode* ContinueNode_new (int source_line);
  */
 typedef enum BinaryOpType {
     OROP, ANDOP, EQOP, NEQOP, LTOP, LEOP, GEOP, GTOP,
-    ADDOP, SUBOP, MULOP, DIVOP, MODOP
+    ADDOP, SUBOP, MULOP, DIVOP, MODOP, INVALID
 } BinaryOpType;
 
 /**
