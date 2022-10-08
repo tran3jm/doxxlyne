@@ -54,7 +54,7 @@ function run_test {
         fi
 
         # run valgrind
-        valgrind --verbose $EXE $ARGS &>$VALGRND
+        valgrind --verbose --leak-check=full --show-leak-kinds=all --track-origins=yes $EXE $ARGS &>$VALGRND
     else
         echo "$PTAG FAIL (timeout)"
     fi

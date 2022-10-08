@@ -1,0 +1,7 @@
+def int double_arrays() {
+    int a[10];
+    int arr[6];
+    a[0] = 6;
+    arr[6] = 5;
+    return arr[a[0]];
+}

@@ -157,7 +157,7 @@ void manip_nl_character(char* input, char* returnBuffer) {
             } else if(next_char == 't') {
                 out_line[index] = '\t';
             } else {
-                //Error_throw_printf("Invalid escaped character %c", input[i]);
+                Error_throw_printf("Invalid escaped character %c", input[i]);
             }
         } else {
             out_line[index] = input[i];
@@ -186,8 +186,6 @@ ASTNode* parse_literal(TokenQueue* input) {
         char *result = token->text+1; // removes first character
         result[strlen(result) -1 ] = '\0'; // removes last character
         manip_nl_character(result, manipulated_string);
-        print(manipulated_string);
-        print("\n");
         return LiteralNode_new_string(manipulated_string, lineNum);
     } else if ( token_str_eq("true", token->text) ) {
         return LiteralNode_new_bool(true, lineNum);
@@ -529,7 +527,9 @@ ASTNode* parse_vardecl (TokenQueue* input)
        match_and_discard_next_token(input, SYM, "[");
        if (check_next_token_type(input, DECLIT)) {
            isarray = true;
-           array_length = atoi(TokenQueue_remove(input)->text);
+           Token* arr_token = TokenQueue_remove(input);
+           array_length = atoi(arr_token->text);
+           free(arr_token);
        }
        match_and_discard_next_token(input, SYM, "]");
    }
@@ -747,7 +747,7 @@ ASTNode* parse_program (TokenQueue* input)
 ASTNode* parse (TokenQueue* input)
 {
   if (input == NULL) {
-      Error_throw_printf("Null Input");
+    Error_throw_printf("Null Input");
   }
   return parse_program(input);
 }

@@ -1,0 +1,9 @@
+def main() {
+    int x;
+    bool a;
+    // should be 4 + (3 * 2) = 10
+    x = 4 + 3 * 2;
+    // Should be true && (true || false) == true
+    a = true && true || false
+    return 5;
+}
