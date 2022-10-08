@@ -490,7 +490,7 @@ typedef struct ASTNode
         struct FuncCallNode funccall;
         struct LiteralNode literal;
     };
-} ASTNode;
+}   ASTNode;
 
 /*
  * Declare NodeList to be a linked list of ASTNode* elements.

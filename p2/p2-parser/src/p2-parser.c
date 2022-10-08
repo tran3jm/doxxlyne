@@ -8,8 +8,7 @@
 #include <string.h>
 ASTNode* parse_expressions(TokenQueue* input);
 ASTNode* parse_block(TokenQueue* input);
-ASTNode* parse_binOp(TokenQueue* input);
-bool find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input);
+BinaryOpType find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input);
 /*
 * helper functions
 */
@@ -118,6 +117,7 @@ DecafType parse_type (TokenQueue* input)
   Token_free(token);
   return t;
 }
+
 //Used for debugging, didn't feel like typing printf every time
 void print(char* str) {
   printf("%s", str);
@@ -139,6 +139,35 @@ void parse_id (TokenQueue* input, char* buffer)
   Token_free(token);
 }
 
+void manip_nl_character(char* input, char* returnBuffer) {
+    int len = strlen(input);
+    char out_line[256];
+    memset(out_line, 0, sizeof(out_line));
+    char backslash = '\\';
+    int i       = 0;
+    int index   = 0;
+    int n_slashes = 0;
+    while(i <= len){
+        if(input[i] == backslash) {
+            n_slashes++;
+            i++;
+            char next_char = input[i];
+            if(next_char == 'n') {
+                out_line[index] = '\n';
+            } else if(next_char == 't') {
+                out_line[index] = '\t';
+            } else {
+                //Error_throw_printf("Invalid escaped character %c", input[i]);
+            }
+        } else {
+            out_line[index] = input[i];
+        }
+        index++;
+        i++;
+    }
+    snprintf(returnBuffer, strlen(out_line) + n_slashes + 1, "%s", out_line);
+}
+
 /**
 * @brief Parse and return a literal
 *
@@ -147,6 +176,7 @@ void parse_id (TokenQueue* input, char* buffer)
 ASTNode* parse_literal(TokenQueue* input) {
     Token* token = TokenQueue_remove(input);
     int lineNum = get_next_token_line(input);
+    char manipulated_string[MAX_ID_LEN];
     //
     if (token->type == DECLIT) {
         return LiteralNode_new_int(atoi(token->text), lineNum);
@@ -154,8 +184,11 @@ ASTNode* parse_literal(TokenQueue* input) {
         return LiteralNode_new_int((int)strtol(token->text, NULL, 16), lineNum);
     } else if (token->type == STRLIT) {
         char *result = token->text+1; // removes first character
-        result[strlen(result)-1] = '\0'; // removes last character
-        return LiteralNode_new_string(result, lineNum);
+        result[strlen(result) -1 ] = '\0'; // removes last character
+        manip_nl_character(result, manipulated_string);
+        print(manipulated_string);
+        print("\n");
+        return LiteralNode_new_string(manipulated_string, lineNum);
     } else if ( token_str_eq("true", token->text) ) {
         return LiteralNode_new_bool(true, lineNum);
     } else if (token_str_eq("false", token->text) ) {
@@ -230,7 +263,7 @@ ASTNode* parse_base_expressions(TokenQueue* input) {
     ASTNode* node = NULL;
     // (function call)
     if (check_next_token_type(input, ID)) {
-        if (check_next_token(TokenQueue_peek(input)->next, SYM, "(")) {
+        if (strcmp(TokenQueue_peek(input)->next->text, "(") == 0) {
             node = parse_function_call(input);
         } else {
             node = parse_location(input);
@@ -240,9 +273,6 @@ ASTNode* parse_base_expressions(TokenQueue* input) {
         match_and_discard_next_token(input, SYM, "(");
         node = parse_expressions(input);
         match_and_discard_next_token(input, SYM, ")");
-    // location
-    } else if (check_next_token_type(input, ID)) {
-        node = parse_location(input);
     // literal
     } else {
         node = parse_literal(input);
@@ -256,7 +286,7 @@ ASTNode* parse_base_expressions(TokenQueue* input) {
 *
 * @param input Token queue to modify
 */
-bool find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input) {
+BinaryOpType find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input) {
     
     Token* token = TokenQueue_peek(input);
 
@@ -265,8 +295,8 @@ bool find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input) {
     int k = 0;
     int size_symbs;
     int i;
-    while (token != NULL && strcmp(token->text, ";") != 0 && strcmp(token->text, ")"
-        && strcmp(token->text, "]") && strcmp(token->text, ","))) {
+    while (token != NULL && strcmp(token->text, ";") != 0 && strcmp(token->text, ")")
+        && strcmp(token->text, "]") && strcmp(token->text, ",")) {
         if (token->type == SYM) {
             symbs[k] = token;
             k++;
@@ -277,11 +307,11 @@ bool find_binop(BinaryOpType binop[], int binop_amounts, TokenQueue* input) {
     for (size_symbs = k-1; size_symbs >= 0; size_symbs--) {
         for (i = 0; i < binop_amounts; i++) {
             if (strcmp(symbs[size_symbs]->text, BinaryOpToString(binop[i])) == 0 ) {
-                return true;
+                return binop[i];
             }
         }
     }
-    return false;
+    return INVALID;
 }
 
 
@@ -301,51 +331,183 @@ ASTNode* parse_unary(TokenQueue* input, UnaryOpType ut, int source_line) {
 *
 * @param input Token queue to modify
 */
+ASTNode* parse_bin_math_primary(TokenQueue* input) {
+
+    ASTNode* root = parse_base_expressions(input);
+    int source_line = get_next_token_line(input);
+
+    BinaryOpType arith_primary[3] = {MULOP, DIVOP, MODOP};
+    BinaryOpType bo = find_binop(arith_primary, 4, input);
+
+    while (bo != INVALID) 
+    {
+        match_and_discard_next_token(input, SYM, BinaryOpToString(bo));
+        ASTNode* new_root = BinaryOpNode_new(bo, root, 
+            parse_base_expressions(input), source_line);
+        root = new_root;
+        bo = find_binop(arith_primary, 3, input);
+    }
+
+    return root;
+}
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_bin_math_secondary(TokenQueue* input) {
+
+    ASTNode* root = parse_bin_math_primary(input);
+    int source_line = get_next_token_line(input);
+
+    BinaryOpType arith_secondary[2] = {ADDOP, SUBOP};
+    BinaryOpType bo = find_binop(arith_secondary, 2, input);
+
+    while (bo != INVALID) 
+    {
+        match_and_discard_next_token(input, SYM, BinaryOpToString(bo));
+        ASTNode* new_root = BinaryOpNode_new(bo, root, 
+            parse_bin_math_secondary(input), source_line);
+        root = new_root;
+        bo = find_binop(arith_secondary, 2, input);
+    }
+
+    return root;
+}
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_bin_relations(TokenQueue* input) {
+
+    ASTNode* root = parse_bin_math_secondary(input);
+    int source_line = get_next_token_line(input);
+
+    BinaryOpType relations[4] = {LTOP, LEOP, GEOP, GTOP};
+    BinaryOpType bo = find_binop(relations, 4, input);
+
+    while (bo != INVALID) 
+    {
+        match_and_discard_next_token(input, SYM, BinaryOpToString(bo));
+        ASTNode* new_root = BinaryOpNode_new(bo, root, 
+            parse_bin_math_secondary(input), source_line);
+        root = new_root;
+        bo = find_binop(relations, 4, input);
+    }
+
+    return root;
+}
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_bin_equality(TokenQueue* input) {
+
+    ASTNode* root = parse_bin_relations(input);
+    int source_line = get_next_token_line(input);
+
+    BinaryOpType equality[2] = {EQOP, NEQOP};
+    BinaryOpType bo = find_binop(equality, 2, input);
+
+    while (bo != INVALID) 
+    {
+        match_and_discard_next_token(input, SYM, BinaryOpToString(bo));
+        ASTNode* new_root = BinaryOpNode_new(bo, root, 
+            parse_bin_relations(input), source_line);
+        root = new_root;
+        bo = find_binop(equality, 2, input);
+    }
+
+    return root;
+}
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_bin_AND(TokenQueue* input) {
+
+    ASTNode* root = parse_bin_equality(input);
+    int source_line = get_next_token_line(input);
+
+    int k = 0;
+
+    while (check_next_token(input, SYM, "&&")) 
+    {
+        match_and_discard_next_token(input, SYM, "&&");
+        ASTNode* new_root = BinaryOpNode_new(ADDOP, root, 
+            parse_bin_equality(input), source_line);
+        root = new_root;
+        k++;
+    }
+
+    return root;
+}
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
+ASTNode* parse_bin_OR(TokenQueue* input) {
+
+    ASTNode* root = parse_bin_AND(input);
+    int source_line = get_next_token_line(input);
+
+    while (check_next_token(input, SYM, "||")) {
+        match_and_discard_next_token(input, SYM, "||");
+        ASTNode* new_root = BinaryOpNode_new(OROP, root, 
+            parse_bin_AND(input), source_line);
+        root = new_root;
+    }
+    return root;
+}
+
+
+/**
+* @brief Parse and return a block node
+*        ONLY IS HANDLING BASE EXPRESSIONS FOR NOW. *****
+*
+* @param input Token queue to modify
+*/
 ASTNode* parse_expressions(TokenQueue* input) {
     ASTNode* expression = NULL;
     int lineNum = get_next_token_line(input);
-    BinaryOpType binops[13] = {OROP, ANDOP, EQOP, NEQOP, LTOP, LEOP, GEOP, GTOP,
-    ADDOP, SUBOP, MULOP, DIVOP, MODOP};
+    BinaryOpType binops[13] = { OROP, ANDOP, EQOP, NEQOP, 
+    LTOP, LEOP, GEOP, GTOP, ADDOP, SUBOP, MULOP, DIVOP,
+     MODOP};
 
-    // unary expression
-    if (check_next_token(input, SYM, "!")) {
+    // binary expression
+    if (!check_next_token(input, SYM, "!") && 
+        !check_next_token(input, SYM, "-") &&
+        find_binop(binops, 13, input) != INVALID) {
+        expression = parse_bin_OR(input);
+    // unary expression = !
+    } else if (check_next_token(input, SYM, "!")) {
         match_and_discard_next_token(input, SYM, "!");
         expression = parse_unary(input, NOTOP, lineNum);
     // unary expression: -
     } else if (check_next_token(input, SYM, "-")) {
         match_and_discard_next_token(input, SYM, "-");
         expression = parse_unary(input, NEGOP, lineNum);
-    // binary expression
-    // } else if (find_binop(binops, 13, input) != INVALID) {
-    //     expression = parse_binOp(input);
-    // base expression: !)
     } else {
         expression = parse_base_expressions(input);
-        printf("%d \n", expression->type);
     }
 
   return expression;
 }
- 
-// int parse_array_as_index(TokenQueue* input) {
-//     char identifier[MAX_TOKEN_LEN];
-//     int dec = -1;
-//     if (check_next_token_type(input, DECLIT)) {
-//         return atoi(TokenQueue_remove(input)->text)
-//     }
-//     // finds variable type, identifier, and semicolon
-//     parse_id(input, identifier);
-//     while(!check_next_token_type(input, DECLIT)) {
-//         match_and_discard_next_token(input, SYM, "[");
-//         if (check_next_token_type(input, DECLIT)) {
-//             break;
-//         } else {
- 
-//         }
-//         match_and_discard_next_token(input, SYM, "]");
-//     }
-//     return dec;
-// }
+
 /**
 * @brief Parse and return a Variable declaration node
 *
@@ -368,9 +530,6 @@ ASTNode* parse_vardecl (TokenQueue* input)
        if (check_next_token_type(input, DECLIT)) {
            isarray = true;
            array_length = atoi(TokenQueue_remove(input)->text);
-       // check for case like arr[a[0]]
-       // } else if (check_next_token_type(input, ID) {
-       //     parse_array_as_index
        }
        match_and_discard_next_token(input, SYM, "]");
    }
@@ -479,7 +638,7 @@ ASTNode* parse_block(TokenQueue* input) {
            // check for same location type and literal type
            NodeList_add(stments, assignment);
  
-       } else if ( token_str_eq("return", token->text) ) {
+       } else if (check_next_token(input, KEY, "return")) {
            ASTNode* expression = NULL;
            discard_next_token(input);
            if (!check_next_token(input, SYM, ";")) {
